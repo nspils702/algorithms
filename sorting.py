@@ -35,22 +35,23 @@ def merge(left, right):
 ###
 
 #quick_sort
-def quick_sort(arr, low, high):
-    while low < high:
-        arr, p = partition(arr, low, high)
-        arr = quick_sort(arr, low, p-1)
-        arr = quick_sort(arr, p+1, high)
-    return arr
-    
-def partition(arr, low, high):
-    p = arr[high]
-    index = low
+def quick_sort(nums, low, high):
+    if low < high:
+        nums, p = partition(nums, low, high)
+        nums = quick_sort(nums, low, p - 1)
+        nums = quick_sort(nums, p + 1, high)
+    return nums
+
+
+def partition(nums, low, high):
+    pivot = nums[high]
+    i = low
     for j in range(low, high):
-        if arr[j] < p:
-            arr[index], arr[j] = arr[j], arr[index]
-            index += 1
-    arr[index], arr[high] = arr[high], arr[index]
-    return arr, p
+        if nums[j] < pivot:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+    nums[i], nums[high] = nums[high], nums[i]
+    return nums, i
 
             
 # chooses pivot
@@ -62,7 +63,7 @@ def partition(arr, low, high):
 def test():
     list = [55, 33, 22, 11, 33, 44, 55, 66, 77]
     start = time.time()
-    print(quick_sort(list, 0, len(list)))
+    print(quick_sort(list, 0, len(list)-1))
     end = time.time()
     print(start-end)
 
